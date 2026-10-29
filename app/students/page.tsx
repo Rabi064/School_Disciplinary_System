@@ -1,17 +1,20 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { api } from '@/lib/api-client'
 import { Search, Filter, Plus, User } from 'lucide-react'
 
 export default function StudentsPage() {
+  const router = useRouter()
   const [students, setStudents] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState({
@@ -69,7 +72,7 @@ export default function StudentsPage() {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Students</h1>
             <p className="text-slate-600 mt-1">Search and view student information</p>
           </div>
-          <Button onClick={() => window.location.href = '/students/new'} className="shadow-lg shadow-emerald-500/25">
+          <Button onClick={() => router.push('/students/new')} className="shadow-lg shadow-emerald-500/25">
             <Plus className="mr-2 h-4 w-4" />
             Add Student
           </Button>
@@ -82,36 +85,48 @@ export default function StudentsPage() {
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Input
-                label="Student ID"
-                placeholder="e.g., STU001"
-                value={filters.studentId}
-                onChange={(e) => handleFilterChange('studentId', e.target.value)}
-              />
-              <Input
-                label="Name"
-                placeholder="Search by name..."
-                value={filters.name}
-                onChange={(e) => handleFilterChange('name', e.target.value)}
-              />
-              <Input
-                label="Class Grade"
-                placeholder="e.g., 10A"
-                value={filters.classGrade}
-                onChange={(e) => handleFilterChange('classGrade', e.target.value)}
-              />
-              <Select
-                label="Status"
-                value={filters.activeStatus}
-                onChange={(e) => handleFilterChange('activeStatus', e.target.value)}
-                options={[
-                  { value: '', label: 'All Statuses' },
-                  { value: 'ACTIVE', label: 'Active' },
-                  { value: 'INACTIVE', label: 'Inactive' },
-                  { value: 'GRADUATED', label: 'Graduated' },
-                  { value: 'TRANSFERRED', label: 'Transferred' },
-                ]}
-              />
+              <div className="space-y-2">
+                <Label>Student ID</Label>
+                <Input
+                  placeholder="e.g., STU001"
+                  value={filters.studentId}
+                  onChange={(e) => handleFilterChange('studentId', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Name</Label>
+                <Input
+                  placeholder="Search by name..."
+                  value={filters.name}
+                  onChange={(e) => handleFilterChange('name', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Class Grade</Label>
+                <Input
+                  placeholder="e.g., 10A"
+                  value={filters.classGrade}
+                  onChange={(e) => handleFilterChange('classGrade', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Status</Label>
+                <Select
+                  value={filters.activeStatus}
+                  onValueChange={(value) => handleFilterChange('activeStatus', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="All Statuses" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">All Statuses</SelectItem>
+                    <SelectItem value="ACTIVE">Active</SelectItem>
+                    <SelectItem value="INACTIVE">Inactive</SelectItem>
+                    <SelectItem value="GRADUATED">Graduated</SelectItem>
+                    <SelectItem value="TRANSFERRED">Transferred</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -155,7 +170,7 @@ export default function StudentsPage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => window.location.href = `/students/${student.id}`}
+                          onClick={() => router.push(`/students/${student.id}`)}
                         >
                           View
                         </Button>

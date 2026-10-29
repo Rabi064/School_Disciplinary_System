@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,6 +11,7 @@ import { api } from '@/lib/api-client'
 import { Plus, FileText, Clock, CheckCircle, AlertCircle } from 'lucide-react'
 
 export default function TeacherDashboard() {
+  const router = useRouter()
   const [cases, setCases] = useState<any[]>([])
   const [stats, setStats] = useState({
     submitted: 0,
@@ -75,7 +77,7 @@ export default function TeacherDashboard() {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Teacher Dashboard</h1>
             <p className="text-slate-600 mt-1">Manage your incident reports</p>
           </div>
-          <Button onClick={() => window.location.href = '/cases/new'}>
+          <Button onClick={() => router.push('/cases/new')}>
             <Plus className="mr-2 h-4 w-4" />
             Submit Incident
           </Button>
@@ -146,7 +148,7 @@ export default function TeacherDashboard() {
                 <h3 className="mt-2 text-sm font-semibold text-gray-900">No reports yet</h3>
                 <p className="mt-1 text-sm text-gray-500">Get started by submitting your first incident report.</p>
                 <div className="mt-6">
-                  <Button onClick={() => window.location.href = '/cases/new'}>
+                  <Button onClick={() => router.push('/cases/new')}>
                     <Plus className="mr-2 h-4 w-4" />
                     Submit Incident
                   </Button>
@@ -174,7 +176,7 @@ export default function TeacherDashboard() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => window.location.href = `/cases/${caseItem.id}`}
+                          onClick={() => router.push(`/cases/${caseItem.id}`)}
                         >
                           View
                         </Button>

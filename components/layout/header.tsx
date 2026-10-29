@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/use-auth'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
@@ -14,6 +15,7 @@ import {
 import { LogOut, User } from 'lucide-react'
 
 export function Header() {
+  const router = useRouter()
   const { user, logout } = useAuth()
 
   const getRoleLabel = (role: string) => {
@@ -37,7 +39,7 @@ export function Header() {
 
   const handleLogout = async () => {
     await logout()
-    window.location.href = '/login'
+    router.push('/login')
   }
 
   return (

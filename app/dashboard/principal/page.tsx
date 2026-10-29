@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -14,6 +15,7 @@ import { FileText, Clock, CheckCircle, AlertCircle, Users, Shield } from 'lucide
 const COLORS = ['#10b981', '#64748b', '#94a3b8', '#475569', '#334155']
 
 export default function PrincipalDashboard() {
+  const router = useRouter()
   const [cases, setCases] = useState<any[]>([])
   const [users, setUsers] = useState<any[]>([])
   const [stats, setStats] = useState({
@@ -145,7 +147,7 @@ export default function PrincipalDashboard() {
             </h1>
             <p className="text-muted-foreground mt-1">Overview of disciplinary management</p>
           </div>
-          <Button className="shadow-lg shadow-primary/25">
+          <Button onClick={() => router.push('/cases/new')} className="shadow-lg shadow-primary/25">
             <FileText className="w-4 h-4 mr-2" />
             New Report
           </Button>
@@ -337,7 +339,7 @@ export default function PrincipalDashboard() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => window.location.href = `/cases/${caseItem.id}`}
+                            onClick={() => router.push(`/cases/${caseItem.id}`)}
                           >
                             View
                           </Button>
@@ -386,7 +388,7 @@ export default function PrincipalDashboard() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => window.location.href = `/users/${user.id}`}
+                              onClick={() => router.push(`/users/${user.id}`)}
                               className="text-purple-600 hover:text-purple-700 hover:bg-purple-50"
                             >
                               Review

@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Clock } from 'lucide-react'
@@ -7,18 +8,19 @@ import { useAuth } from '@/hooks/use-auth'
 import { useEffect } from 'react'
 
 export default function PendingApprovalPage() {
+  const router = useRouter()
   const { user, logout } = useAuth()
 
   useEffect(() => {
     // If user is not pending, redirect them
     if (user && user.accountStatus !== 'PENDING') {
-      window.location.href = '/'
+      router.push('/')
     }
-  }, [user])
+  }, [user, router])
 
   const handleLogout = async () => {
     await logout()
-    window.location.href = '/login'
+    router.push('/login')
   }
 
   return (

@@ -1,17 +1,20 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { api } from '@/lib/api-client'
 import { Search, Filter, Plus, Shield, CheckCircle, Clock, XCircle } from 'lucide-react'
 
 export default function UsersPage() {
+  const router = useRouter()
   const [users, setUsers] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState({
@@ -94,7 +97,7 @@ export default function UsersPage() {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Staff Management</h1>
             <p className="text-slate-600 mt-1">Manage staff accounts and approvals</p>
           </div>
-          <Button onClick={() => window.location.href = '/users/new'} className="shadow-lg shadow-emerald-500/25">
+          <Button onClick={() => router.push('/users/new')} className="shadow-lg shadow-emerald-500/25">
             <Plus className="mr-2 h-4 w-4" />
             Add Staff
           </Button>
@@ -107,39 +110,54 @@ export default function UsersPage() {
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-3">
-              <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder="Search by name or email..."
-                  value={filters.search}
-                  onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="pl-10"
-                />
+              <div className="space-y-2">
+                <Label>Search</Label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    placeholder="Search by name or email..."
+                    value={filters.search}
+                    onChange={(e) => handleFilterChange('search', e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
               </div>
-              <Select
-                label="Status"
-                value={filters.status}
-                onChange={(e) => handleFilterChange('status', e.target.value)}
-                options={[
-                  { value: '', label: 'All Statuses' },
-                  { value: 'ACTIVE', label: 'Active' },
-                  { value: 'PENDING', label: 'Pending' },
-                  { value: 'DEACTIVATED', label: 'Deactivated' },
-                  { value: 'REJECTED', label: 'Rejected' },
-                ]}
-              />
-              <Select
-                label="Role"
-                value={filters.role}
-                onChange={(e) => handleFilterChange('role', e.target.value)}
-                options={[
-                  { value: '', label: 'All Roles' },
-                  { value: 'PRINCIPAL', label: 'Principal' },
-                  { value: 'TEACHER', label: 'Teacher' },
-                  { value: 'COUNSELLOR', label: 'Counsellor' },
-                  { value: 'ADMIN', label: 'Admin' },
-                ]}
-              />
+              <div className="space-y-2">
+                <Label>Status</Label>
+                <Select
+                  value={filters.status}
+                  onValueChange={(value) => handleFilterChange('status', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="All Statuses" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">All Statuses</SelectItem>
+                    <SelectItem value="ACTIVE">Active</SelectItem>
+                    <SelectItem value="PENDING">Pending</SelectItem>
+                    <SelectItem value="DEACTIVATED">Deactivated</SelectItem>
+                    <SelectItem value="REJECTED">Rejected</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Role</Label>
+                <Select
+                  value={filters.role}
+                  onValueChange={(value) => handleFilterChange('role', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="All Roles" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">All Roles</SelectItem>
+                    <SelectItem value="PRINCIPAL">Principal</SelectItem>
+                    <SelectItem value="TEACHER">Teacher</SelectItem>
+                    <SelectItem value="COUNSELLOR">Counsellor</SelectItem>
+                    <SelectItem value="ADMIN">Admin</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </CardContent>
         </Card>

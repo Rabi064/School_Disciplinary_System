@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -14,6 +15,7 @@ import { api } from '@/lib/api-client'
 import { Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function CasesPage() {
+  const router = useRouter()
   const [cases, setCases] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState({
@@ -90,7 +92,7 @@ export default function CasesPage() {
             </h1>
             <p className="text-muted-foreground mt-1">View and manage disciplinary cases</p>
           </div>
-          <Button className="shadow-lg shadow-primary/25">
+          <Button onClick={() => router.push('/cases/new')} className="shadow-lg shadow-primary/25">
             <Filter className="w-4 h-4 mr-2" />
             New Case
           </Button>
@@ -202,7 +204,7 @@ export default function CasesPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => window.location.href = `/cases/${caseItem.id}`}
+                              onClick={() => router.push(`/cases/${caseItem.id}`)}
                             >
                               View
                             </Button>

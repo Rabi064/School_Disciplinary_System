@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/use-auth'
 import {
@@ -26,6 +26,7 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
   const { user, logout } = useAuth()
 
   const filteredNavigation = navigation.filter((item) =>
@@ -34,7 +35,7 @@ export function Sidebar() {
 
   const handleLogout = async () => {
     await logout()
-    window.location.href = '/login'
+    router.push('/login')
   }
 
   return (

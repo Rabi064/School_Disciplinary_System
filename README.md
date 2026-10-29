@@ -268,8 +268,8 @@ See [docs/mvp-scope.md](docs/mvp-scope.md) for complete MVP definition.
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd sdms
+git clone https://github.com/Rabi064/School_Disciplinary_Sys.git
+cd School_Disciplinary_Sys
 ```
 
 2. Install dependencies:
@@ -295,6 +295,19 @@ npm run dev
 ```
 
 6. Open [http://localhost:3000](http://localhost:3000)
+
+### Default Account Credentials
+
+After running the database seed, you can use the following credentials to log in:
+
+| Role | Email | Password | Status |
+|------|-------|----------|--------|
+| Principal | principal@school.edu | principal123 | Active |
+| Teacher | teacher@school.edu | teacher123 | Active |
+| Counsellor | counsellor@school.edu | counsellor123 | Active |
+| Admin | admin@school.edu | admin123 | Active |
+
+**Note:** These are default test credentials. Change them immediately after first login in a production environment.
 
 ### Environment Variables
 

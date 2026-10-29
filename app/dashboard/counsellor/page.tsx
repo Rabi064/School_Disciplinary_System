@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,6 +11,7 @@ import { api } from '@/lib/api-client'
 import { FileText, Calendar, CheckCircle, AlertTriangle, Heart } from 'lucide-react'
 
 export default function CounsellorDashboard() {
+  const router = useRouter()
   const [cases, setCases] = useState<any[]>([])
   const [interventions, setInterventions] = useState<any[]>([])
   const [followUps, setFollowUps] = useState<any[]>([])
@@ -173,7 +175,7 @@ export default function CounsellorDashboard() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => window.location.href = `/cases/${caseItem.id}`}
+                            onClick={() => router.push(`/cases/${caseItem.id}`)}
                           >
                             View
                           </Button>
