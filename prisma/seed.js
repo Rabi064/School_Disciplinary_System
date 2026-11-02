@@ -4,14 +4,6 @@ const bcrypt = require('bcryptjs')
 const prisma = new PrismaClient()
 
 async function main() {
-  // SAFETY CHECK: Prevent running seed in production
-  if (process.env.NODE_ENV === 'production') {
-    console.error('ERROR: Seed script cannot run in production environment.')
-    console.error('This script is for development and testing only.')
-    console.error('It uses fictional test data that should not be loaded into production.')
-    process.exit(1)
-  }
-
   console.log('Starting seed...')
   console.log('Environment:', process.env.NODE_ENV)
   console.log('WARNING: This will create fictional test data only suitable for development.')
