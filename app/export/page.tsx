@@ -6,7 +6,7 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
+import { LegacySelect as Select } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { api } from '@/lib/api-client'
@@ -229,7 +229,7 @@ export default function ExportPage() {
                 <div>
                   <p className="text-sm font-medium text-gray-600">Status</p>
                   {stats.requiresPagination ? (
-                    <Badge variant="danger">Exceeds Limit</Badge>
+                    <Badge variant="destructive">Exceeds Limit</Badge>
                   ) : (
                     <Badge variant="success">Within Limit</Badge>
                   )}
@@ -377,8 +377,7 @@ export default function ExportPage() {
           </Button>
           <Button
             onClick={handleExport}
-            isLoading={isExporting}
-            disabled={selectedFields.length === 0 || (stats?.requiresPagination)}
+            disabled={isExporting || selectedFields.length === 0 || (stats?.requiresPagination)}
           >
             <Download className="mr-2 h-4 w-4" />
             Export CSV

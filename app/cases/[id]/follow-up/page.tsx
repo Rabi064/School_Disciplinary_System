@@ -6,7 +6,7 @@ import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
+import { LegacySelect as Select } from '@/components/ui/select'
 import { api } from '@/lib/api-client'
 import { ArrowLeft, Save, UserPlus } from 'lucide-react'
 
@@ -150,7 +150,7 @@ export default function FollowUpPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" isLoading={isLoading} className="shadow-lg shadow-emerald-500/25">
+                <Button type="submit" disabled={isLoading} className="shadow-lg shadow-emerald-500/25">
                   <UserPlus className="mr-2 h-4 w-4" />
                   Assign & Save Follow-up
                 </Button>

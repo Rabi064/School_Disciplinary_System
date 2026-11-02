@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Select } from '@/components/ui/select'
+import { LegacySelect as Select } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { api } from '@/lib/api-client'
 import { useAuth } from '@/hooks/use-auth'

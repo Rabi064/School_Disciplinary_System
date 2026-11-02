@@ -85,7 +85,7 @@ export default function ReopenCasePage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" isLoading={isLoading} className="shadow-lg shadow-emerald-500/25">
+                <Button type="submit" disabled={isLoading} className="shadow-lg shadow-emerald-500/25">
                   <RotateCcw className="mr-2 h-4 w-4" />
                   Reopen Case
                 </Button>

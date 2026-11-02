@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Select } from '@/components/ui/select'
+import { LegacySelect as Select } from '@/components/ui/select'
 import { api } from '@/lib/api-client'
 import { ArrowLeft, Save } from 'lucide-react'
 
@@ -109,7 +109,7 @@ export default function CaseReviewPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" isLoading={isLoading} className="shadow-lg shadow-emerald-500/25">
+                <Button type="submit" disabled={isLoading} className="shadow-lg shadow-emerald-500/25">
                   <Save className="mr-2 h-4 w-4" />
                   Submit Review
                 </Button>
