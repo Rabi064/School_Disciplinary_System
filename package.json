@@ -15,7 +15,8 @@
     "test:ui": "vitest --ui",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "node prisma/seed.js"
+    "prisma:seed": "node prisma/seed.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
